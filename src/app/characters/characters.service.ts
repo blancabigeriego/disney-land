@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, map, take, tap } from "rxjs";
+import { BehaviorSubject, map, switchMap, take, tap } from "rxjs";
 import { Character } from "./character.model";
 
 interface CharacterData {
@@ -59,5 +59,44 @@ export class CharactersService {
           this._characters.next(characters);
         })
       );
+  }
+
+  addCharacter(
+    name: string,
+    films: string[],
+    shortFilms: string[],
+    tvShows: string[],
+    videoGames: string[],
+    parkAttractions: string[],
+    allies: string[],
+    enemies: string[],
+    imageUrl: string
+  ) {
+    let generatedId: string;
+    let newCharacter: Character;
+    newCharacter = new Character(
+      Math.random(),
+      name,
+      films,
+      shortFilms,
+      tvShows,
+      videoGames,
+      parkAttractions,
+      allies,
+      enemies,
+      imageUrl
+    );
+
+    return (
+      this.http.post<{ name: string }>(
+        "https://disneyland-33519-default-rtdb.europe-west1.firebasedatabase.app/",
+        { ...newCharacter, id: null }
+      ),
+      take(1),
+      switchMap((resData) => {
+        generatedId = resData.name;
+        return this.characters;
+      })
+    );
   }
 }
