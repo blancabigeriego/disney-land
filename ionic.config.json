@@ -1,0 +1,7 @@
+{
+  "name": "disney-land",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
