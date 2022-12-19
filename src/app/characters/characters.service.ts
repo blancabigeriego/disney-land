@@ -1,39 +1,63 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { BehaviorSubject, map, take, tap } from "rxjs";
 import { Character } from "./character.model";
 
+interface CharacterData {
+  id: number;
+  name: string;
+  films: string[];
+  shortFilms: string[];
+  tvShows: string[];
+  parkAttractions: string[];
+  videoGames: string[];
+  allies: string[];
+  enemies: string[];
+  imageUrl: string;
+}
 @Injectable({
   providedIn: "root",
 })
 export class CharactersService {
-  private _characters: Character[] = [
-    new Character(
-      1,
-      "Blancanieves",
-      ["SnowWhite and the 7 dwarfs", "SnowWhite 2"],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.bbc.com%2Fmundo%2Fnoticias-60133458&psig=AOvVaw1fCffqaRt2JRyVMjjGajQT&ust=1671548168356000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCNjxqaX4hfwCFQAAAAAdAAAAABAE"
-    ),
-    new Character(
-      1,
-      "Simba",
-      ["Lion King"],
-      ["Lion King 2"],
-      ["Timon and Pumbaa"],
-      [],
-      [],
-      ["Timon"],
-      [],
-      "https://i.ebayimg.com/images/g/GBQAAOSwAYtWQJCk/s-l1600.jpg"
-    ),
-  ];
+  private _characters = new BehaviorSubject<Character[]>([]);
 
   get characters() {
-    return [...this._characters];
+    return this._characters.asObservable();
   }
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
+  fetchCharacters() {
+    return this.http
+      .get<{ [key: string]: CharacterData }>(
+        "https://disneyland-33519-default-rtdb.europe-west1.firebasedatabase.app/profile/films.json"
+      )
+      .pipe(
+        map((resData) => {
+          const characters = [];
+          for (const key in resData) {
+            if (resData.hasOwnProperty(key)) {
+              characters.push(
+                new Character(
+                  resData[key].id,
+                  resData[key].name,
+                  resData[key].films,
+                  resData[key].shortFilms,
+                  resData[key].tvShows,
+                  resData[key].videoGames,
+                  resData[key].parkAttractions,
+                  resData[key].allies,
+                  resData[key].enemies,
+                  resData[key].imageUrl
+                )
+              );
+            }
+          }
+          console.log(characters);
+          return characters;
+        }),
+        tap((characters) => {
+          this._characters.next(characters);
+        })
+      );
+  }
 }
