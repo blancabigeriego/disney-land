@@ -1,6 +1,6 @@
 export class Character {
   constructor(
-    public id: number,
+    public id: string,
     public name: string,
     public films: string[],
     public shortFilms: string[],

@@ -1,9 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>character-detail</ion-title>
+    <ion-buttons>
+      <ion-back-button defaultHref="/tabs/characters"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Character Info:</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="ion-padding">
+  <ion-card> </ion-card>
+  <ion-button color="primary" class="ion-margin" (click)="onUpdateCharacter()"
+    >Edit this character!</ion-button
+  >
 </ion-content>
