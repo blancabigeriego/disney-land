@@ -61,6 +61,29 @@ export class CharactersService {
       );
   }
 
+  getCharacter(id: string) {
+    return this.http
+      .get<CharacterData>(
+        `https://disneyland-33519-default-rtdb.europe-west1.firebasedatabase.app/characters/${id}.json`
+      )
+      .pipe(
+        map((characterData: any) => {
+          return new Character(
+            id,
+            characterData.name,
+            characterData.films,
+            characterData.shortFilms,
+            characterData.tvShows,
+            characterData.videoGames,
+            characterData.parkAttractions,
+            characterData.allies,
+            characterData.enemies,
+            characterData.imageUrl
+          );
+        })
+      );
+  }
+
   addCharacter(
     name: string,
     films: string[],
