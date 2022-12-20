@@ -1,20 +1,22 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from "@ionic/angular";
 
-import { CharactersListPageRoutingModule } from './characters-list-routing.module';
+import { CharactersListPageRoutingModule } from "./characters-list-routing.module";
 
-import { CharactersListPage } from './characters-list.page';
+import { CharactersListPage } from "./characters-list.page";
+import { RouterPreloader } from "@angular/router";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CharactersListPageRoutingModule
+
+    CharactersListPageRoutingModule,
   ],
-  declarations: [CharactersListPage]
+  declarations: [CharactersListPage],
 })
 export class CharactersListPageModule {}

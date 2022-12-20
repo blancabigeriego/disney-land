@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { CreateCharacterPage } from "../../create-character/create-character.page";
-import { EditCharacterPage } from "../../edit-character/edit-character.page";
+import { CreateCharacterPage } from "../characters-list/create-character/create-character.page";
+import { EditCharacterPage } from "../characters-list/edit-character/edit-character.page";
 
 import { CharacterDetailPage } from "./character-detail.page";
 

@@ -8,14 +8,28 @@ const routes: Routes = [
     path: "",
     component: CharactersListPage,
   },
-
   {
-    path: "character-detail",
+    path: "create",
     loadChildren: () =>
-      import("./character-detail/character-detail.module").then(
-        (m) => m.CharacterDetailPageModule
+      import("./create-character/create-character.module").then(
+        (m) => m.CreateCharacterPageModule
       ),
   },
+  {
+    path: "edit/:characterId",
+    loadChildren: () =>
+      import("./edit-character/edit-character.module").then(
+        (m) => m.EditCharacterPageModule
+      ),
+  },
+
+  // {
+  //   path: "character-detail",
+  //   loadChildren: () =>
+  //     import("../character-detail/character-detail.module").then(
+  //       (m) => m.CharacterDetailPageModule
+  //     ),
+  // },
 ];
 
 @NgModule({

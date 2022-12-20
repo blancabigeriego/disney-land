@@ -4,6 +4,11 @@ import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 
 const routes: Routes = [
   {
+    path: "",
+    redirectTo: "landing",
+    pathMatch: "full",
+  },
+  {
     path: "landing",
     loadChildren: () =>
       import("./landing/landing.module").then((m) => m.LandingPageModule),
@@ -15,16 +20,13 @@ const routes: Routes = [
         (m) => m.CharactersPageModule
       ),
   },
-  {
-    path: "",
-    redirectTo: "landing",
-    pathMatch: "full",
-  },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules,
+    }),
   ],
   exports: [RouterModule],
 })
