@@ -10,51 +10,66 @@ const routes: Routes = [
     children: [
       {
         path: "characters",
-        loadChildren: () =>
-          import("./characters-list/characters-list.module").then(
-            (m) => m.CharactersListPageModule
-          ),
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("./characters-list/characters-list.module").then(
+                (m) => m.CharactersListPageModule
+              ),
+          },
+          {
+            path: "create",
+            loadChildren: () =>
+              import(
+                "./characters-list/create-character/create-character.module"
+              ).then((m) => m.CreateCharacterPageModule),
+          },
+          {
+            path: ":characterId",
+            loadChildren: () =>
+              import("./character-detail/character-detail.module").then(
+                (m) => m.CharacterDetailPageModule
+              ),
+          },
+          {
+            path: "edit/:characterId",
+            loadChildren: () =>
+              import(
+                "./characters-list/edit-character/edit-character.module"
+              ).then((m) => m.EditCharacterPageModule),
+          },
+        ],
       },
-
       {
-        path: "create",
-        loadChildren: () =>
-          import("./create-character/create-character.module").then(
-            (m) => m.CreateCharacterPageModule
-          ),
+        path: "your-characters",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("./your-characters/your-characters.module").then(
+                (m) => m.YourCharactersPageModule
+              ),
+          },
+          {
+            path: ":characterId",
+            loadChildren: () =>
+              import("./character-detail/character-detail.module").then(
+                (m) => m.CharacterDetailPageModule
+              ),
+          },
+        ],
       },
-      {
-        path: "edit/:characterId",
-        loadChildren: () =>
-          import("./edit-character/edit-character.module").then(
-            (m) => m.EditCharacterPageModule
-          ),
-      },
-      {
-        path: ":characterId",
-        loadChildren: () =>
-          import(
-            "./characters-list/character-detail/character-detail.module"
-          ).then((m) => m.CharacterDetailPageModule),
-      },
-    ],
-  },
-
-  {
-    path: "your-characters",
-    children: [
       {
         path: "",
-        loadChildren: () =>
-          import("./your-characters/your-characters.module").then(
-            (m) => m.YourCharactersPageModule
-          ),
+        redirectTo: "/tabs/characters",
+        pathMatch: "full",
       },
     ],
   },
   {
     path: "",
-    redirectTo: "/landing/tabs/characters",
+    redirectTo: "/tabs/characters",
     pathMatch: "full",
   },
 ];

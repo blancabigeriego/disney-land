@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, map, switchMap, take, tap } from "rxjs";
+import { BehaviorSubject, delay, map, switchMap, take, tap } from "rxjs";
 import { Character } from "./character.model";
 
 interface CharacterData {
@@ -33,7 +33,7 @@ export class CharactersService {
       )
       .pipe(
         map((resData) => {
-          const characters = [];
+          const characters: any[] = [];
           for (const key in resData) {
             if (resData.hasOwnProperty(key)) {
               characters.push(
@@ -87,15 +87,23 @@ export class CharactersService {
       imageUrl
     );
 
-    return (
-      this.http.post<{ name: string }>(
-        "https://disneyland-33519-default-rtdb.europe-west1.firebasedatabase.app/",
+    this.http
+      .post<{ name: string }>(
+        "https://disneyland-33519-default-rtdb.europe-west1.firebasedatabase.app/profile/films.json",
         { ...newCharacter, id: null }
-      ),
+      )
+      .pipe(
+        switchMap((resData) => {
+          generatedId = resData.name;
+          return this.characters;
+        }),
+        tap()
+      );
+    return this.characters.pipe(
       take(1),
-      switchMap((resData) => {
-        generatedId = resData.name;
-        return this.characters;
+
+      tap((characters) => {
+        this._characters.next(characters.concat(newCharacter));
       })
     );
   }

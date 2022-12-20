@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>Create your Character!</ion-title>
     <ion-buttons slot="primary">
-      <ion-button>
+      <ion-button (click)="onCreateChar()" [disabled]="!form.valid">
         <ion-icon name="checkmark" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -23,7 +23,7 @@
               type="text"
               autocomplete
               autocomplete
-              formControlName="name"
+              [formControl]="nameInput"
             ></ion-input>
           </ion-item>
         </ion-col>
@@ -34,7 +34,7 @@
             ><ion-label position="floating"
               >In what films would you like to appear?</ion-label
             >
-            <ion-textarea rows="3" formControlName="films"></ion-textarea
+            <ion-textarea rows="3" [formControl]="filmsInput"></ion-textarea
           ></ion-item>
         </ion-col>
       </ion-row>
@@ -43,69 +43,63 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Any short films?</ion-label>
-            <ion-input
-              type="number"
-              rows="3"
-              formControlName="shortFilms"
-            ></ion-input
+            <ion-input rows="3" [formControl]="filmsInput"></ion-input
           ></ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size-sm="3" offset-sm="3">
+        <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Can we see you on TV?</ion-label>
-            <ion-input formControlName="tvShows"></ion-input>
+            <ion-input [formControl]="tvShowsInput"></ion-input>
           </ion-item>
         </ion-col>
-        <ion-col size-sm="3" offset-sm="3">
+        <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Are you on videogames?</ion-label>
-            <ion-input formControlName="videoGames"></ion-input>
+            <ion-input [formControl]="videoGamesInput"></ion-input>
           </ion-item>
         </ion-col>
-        <ion-col size-sm="3" offset-sm="3">
+        <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating"
               >In What attractions can we find you?</ion-label
             >
-            <ion-input formControlName="parkAttractions"></ion-input>
+            <ion-input [formControl]="parkAttractionsInput"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-col size-sm="3" offset-sm="3">
-        <ion-item>
-          <ion-label position="floating"
-            >Who are your Disney Friends?</ion-label
-          >
-          <ion-input formControlName="allies"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col size-sm="3" offset-sm="3">
-        <ion-item>
-          <ion-label position="floating">Do you have any enemies?</ion-label>
-          <ion-input formControlName="enemies"></ion-input>
-        </ion-item>
-      </ion-col>
-
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
-          <app-image-picker
-            [showPreview]="form.get('image')"
-            (imagePick)="onImagePicked($event)"
-          ></app-image-picker>
+          <ion-item>
+            <ion-label position="floating"
+              >Who are your Disney Friends?</ion-label
+            >
+            <ion-input [formControl]="alliesInput"></ion-input>
+          </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size-sm="3" offset-sm="3">
-          <ion-button
-            color="primary"
-            (click)="onCreateChar()"
-            [disabled]="!form.valid"
-            >Save</ion-button
-          >
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">Do you have any enemies?</ion-label>
+            <ion-input [formControl]="enemiesInput"></ion-input>
+          </ion-item>
         </ion-col>
-        <ion-col size-sm="3" offset-sm="7"
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating"
+              >Please submit the URL of your picture</ion-label
+            >
+            <ion-input [formControl]="imageInput"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3"
           ><ion-button color="danger">Cancel</ion-button>
         </ion-col>
       </ion-row>
