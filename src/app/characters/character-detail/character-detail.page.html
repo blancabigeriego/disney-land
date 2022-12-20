@@ -22,23 +22,40 @@
         <ion-img [src]="character.imageUrl"></ion-img>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding"></ion-col>
+    <ion-row *ngIf="character.films.length >0">
+      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding">
+        <p>You can see me in films like: {{character.films}}</p>
+      </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding"></ion-col>
+    <ion-row *ngIf="character.shortFilms.length >0">
+      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding"
+        ><p>In shorter ones like: {{character.shortFilms}}</p></ion-col
+      >
     </ion-row>
-    <ion-row>
-      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding"></ion-col>
+    <ion-row *ngIf="character.tvShows.length >0">
+      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding">
+        <p>Also on Tv series such as: {{character.tvShows}}</p>
+      </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding"></ion-col>
+    <ion-row *ngIf="character.videoGames.length >0">
+      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding">
+        <p>Play with me in: {{character.videoGames}}</p>
+      </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding"></ion-col>
+    <ion-row *ngIf="character.parkAttractions.length >0">
+      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding">
+        <p>Or find me at DisneyLand in: {{character.parkAttractions}}</p>
+      </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding"></ion-col>
+    <ion-row *ngIf="character.allies.length >0">
+      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding">
+        <p>My best friend are: {{character.allies}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="character.enemies.length >0">
+      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding">
+        <p>And my enemies are: {{character.enemies}}</p>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
