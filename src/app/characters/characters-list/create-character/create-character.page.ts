@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { LoadingController } from "@ionic/angular";
 import { CharactersService } from "../../characters.service";
+import { ReactiveFormsModule } from "@angular/forms";
+import { take } from "rxjs";
 
 // function base64toBlob(base64Data: string, contentType: string) {
 //   contentType = contentType || "";
@@ -32,15 +34,6 @@ import { CharactersService } from "../../characters.service";
 })
 export class CreateCharacterPage implements OnInit {
   form: FormGroup;
-  nameInput: FormControl;
-  filmsInput: FormControl;
-  shortFilmsInput: FormControl;
-  tvShowsInput: FormControl;
-  videoGamesInput: FormControl;
-  parkAttractionsInput: FormControl;
-  alliesInput: FormControl;
-  enemiesInput: FormControl;
-  imageInput: FormControl;
 
   constructor(
     private charactersService: CharactersService,
@@ -49,35 +42,42 @@ export class CreateCharacterPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.nameInput = new FormControl("", [Validators.required]);
-    this.filmsInput = new FormControl("", [Validators.required]);
-    this.shortFilmsInput = this.nameInput = new FormControl("", [
-      Validators.required,
-    ]);
-    this.videoGamesInput = this.nameInput = new FormControl("", [
-      Validators.required,
-    ]);
-    this.parkAttractionsInput = this.nameInput = new FormControl("", [
-      Validators.required,
-    ]);
-    this.alliesInput = this.nameInput = new FormControl("", [
-      Validators.required,
-    ]);
-    this.enemiesInput = this.nameInput = new FormControl("");
-    this.imageInput = this.nameInput = new FormControl("", [
-      Validators.required,
-    ]);
-
     this.form = new FormGroup({
-      name: this.nameInput,
-      films: this.filmsInput,
-      shortFilms: this.shortFilmsInput,
-      tvShows: this.tvShowsInput,
-      videoGames: this.videoGamesInput,
-      parkAttractions: this.parkAttractionsInput,
-      allies: this.alliesInput,
-      enemies: this.enemiesInput,
-      image: this.imageInput,
+      nameInput: new FormControl(null, {
+        updateOn: "blur",
+        validators: [Validators.required],
+      }),
+      filmsInput: new FormControl(null, {
+        updateOn: "blur",
+        validators: [Validators.required],
+      }),
+      shortFilmsInput: new FormControl(null, {
+        updateOn: "blur",
+        validators: [Validators.required],
+      }),
+      tvShowsInput: new FormControl(null, {
+        updateOn: "blur",
+        validators: [Validators.required],
+      }),
+      videoGamesInput: new FormControl(null, {
+        updateOn: "blur",
+        validators: [Validators.required],
+      }),
+      parkAttractionsInput: new FormControl(null, {
+        updateOn: "blur",
+        validators: [Validators.required],
+      }),
+      alliesInput: new FormControl(null, {
+        updateOn: "blur",
+        validators: [Validators.required],
+      }),
+      enemiesInput: new FormControl(null, {
+        updateOn: "blur",
+      }),
+      imageInput: new FormControl(null, {
+        updateOn: "blur",
+        validators: [Validators.required],
+      }),
     });
   }
 
@@ -94,17 +94,19 @@ export class CreateCharacterPage implements OnInit {
 
         return this.charactersService
           .addCharacter(
-            this.form.value.name,
-            this.form.value.films,
-            this.form.value.shortFilms,
-            this.form.value.tvShows,
-            this.form.value.videoGames,
-            this.form.value.parkAttractions,
-            this.form.value.allies,
-            this.form.value.enemies,
-            this.form.value.imageUrl
+            this.form.value.nameInput,
+            this.form.value.filmsInput,
+            this.form.value.shortFilmsInput,
+            this.form.value.tvShowsInput,
+            this.form.value.videoGamesInput,
+            this.form.value.parkAttractionsInput,
+            this.form.value.alliesInput,
+            this.form.value.enemiesInput,
+            this.form.value.imageInput
           )
+          .pipe(take(1))
           .subscribe(() => {
+            console.log("que pasa?");
             loadingEl.dismiss();
             this.form.reset();
             this.router.navigate(["tabs/characters"]);

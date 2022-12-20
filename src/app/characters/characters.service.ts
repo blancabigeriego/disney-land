@@ -52,7 +52,7 @@ export class CharactersService {
               );
             }
           }
-          console.log(characters);
+
           return characters;
         }),
         tap((characters) => {
@@ -87,7 +87,7 @@ export class CharactersService {
       imageUrl
     );
 
-    this.http
+    return this.http
       .post<{ name: string }>(
         "https://disneyland-33519-default-rtdb.europe-west1.firebasedatabase.app/profile/films.json",
         { ...newCharacter, id: null }
@@ -97,14 +97,10 @@ export class CharactersService {
           generatedId = resData.name;
           return this.characters;
         }),
-        tap()
+        take(1),
+        tap((characters) => {
+          this._characters.next(characters.concat(newCharacter));
+        })
       );
-    return this.characters.pipe(
-      take(1),
-
-      tap((characters) => {
-        this._characters.next(characters.concat(newCharacter));
-      })
-    );
   }
 }

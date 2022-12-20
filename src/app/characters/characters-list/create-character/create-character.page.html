@@ -19,12 +19,7 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Name</ion-label>
-            <ion-input
-              type="text"
-              autocomplete
-              autocomplete
-              [formControl]="nameInput"
-            ></ion-input>
+            <ion-input type="text" formControlName="nameInput"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -34,7 +29,7 @@
             ><ion-label position="floating"
               >In what films would you like to appear?</ion-label
             >
-            <ion-textarea rows="3" [formControl]="filmsInput"></ion-textarea
+            <ion-textarea rows="3" formControlName="filmsInput"></ion-textarea
           ></ion-item>
         </ion-col>
       </ion-row>
@@ -43,7 +38,7 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Any short films?</ion-label>
-            <ion-input rows="3" [formControl]="filmsInput"></ion-input
+            <ion-input rows="3" formControlName="shortFilmsInput"></ion-input
           ></ion-item>
         </ion-col>
       </ion-row>
@@ -51,13 +46,13 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Can we see you on TV?</ion-label>
-            <ion-input [formControl]="tvShowsInput"></ion-input>
+            <ion-input formControlName="tvShowsInput"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Are you on videogames?</ion-label>
-            <ion-input [formControl]="videoGamesInput"></ion-input>
+            <ion-input formControlName="videoGamesInput"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size-sm="6" offset-sm="3">
@@ -65,7 +60,7 @@
             <ion-label position="floating"
               >In What attractions can we find you?</ion-label
             >
-            <ion-input [formControl]="parkAttractionsInput"></ion-input>
+            <ion-input formControlName="parkAttractionsInput"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -75,7 +70,7 @@
             <ion-label position="floating"
               >Who are your Disney Friends?</ion-label
             >
-            <ion-input [formControl]="alliesInput"></ion-input>
+            <ion-input formControlName="alliesInput"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -83,7 +78,7 @@
         <ion-col size-sm="6" offset-sm="3">
           <ion-item>
             <ion-label position="floating">Do you have any enemies?</ion-label>
-            <ion-input [formControl]="enemiesInput"></ion-input>
+            <ion-input formControlName="enemiesInput"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -93,7 +88,7 @@
             <ion-label position="floating"
               >Please submit the URL of your picture</ion-label
             >
-            <ion-input [formControl]="imageInput"></ion-input>
+            <ion-input formControlName="imageInput"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
