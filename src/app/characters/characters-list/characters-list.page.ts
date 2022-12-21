@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { IonItemSliding } from "@ionic/angular";
+import { IonItemSliding, LoadingController } from "@ionic/angular";
 import { Subscription } from "rxjs";
 import { Character } from "../character.model";
 import { CharactersService } from "../characters.service";
@@ -12,7 +12,10 @@ import { CharactersService } from "../characters.service";
 export class CharactersListPage implements OnInit {
   loadedCharacters: Character[];
   private charactersSub: Subscription;
-  constructor(private charactersService: CharactersService) {}
+  constructor(
+    private charactersService: CharactersService,
+    private loadingCtrl: LoadingController
+  ) {}
   isLoading = false;
 
   ngOnInit() {
@@ -35,5 +38,19 @@ export class CharactersListPage implements OnInit {
   }
   onEdit(charId: string, slidingItem: IonItemSliding) {
     slidingItem.close();
+  }
+
+  onDeleteCharacter(charId: string, slidingItem: IonItemSliding) {
+    slidingItem.close();
+    this.loadingCtrl
+      .create({
+        message: "Deleting...",
+      })
+      .then((loadingEl) => {
+        loadingEl.present();
+        this.charactersService.deleteCharacter(charId).subscribe(() => {
+          loadingEl.dismiss();
+        });
+      });
   }
 }

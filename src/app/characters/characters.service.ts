@@ -179,4 +179,22 @@ export class CharactersService {
       })
     );
   }
+
+  deleteCharacter(characterId: string) {
+    return this.http
+      .delete(
+        `https://disneyland-33519-default-rtdb.europe-west1.firebasedatabase.app/characters/${characterId}.json`
+      )
+      .pipe(
+        switchMap(() => {
+          return this.characters;
+        }),
+        take(1),
+        tap((characters) => {
+          this._characters.next(
+            characters.filter((ch) => ch.id !== characterId)
+          );
+        })
+      );
+  }
 }
