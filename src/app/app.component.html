@@ -1,3 +1,26 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start" menuId="m1" contentId="m1">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title> Disney Land</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item lines="none">
+          <ion-icon name="sparkles-outline" slot="start"></ion-icon>
+          <ion-label>Disney Characters</ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon slot="start" name="accessibility-outline"></ion-icon>
+          <ion-label>Your Characters</ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon name="exit" slot="start"></ion-icon>
+          <ion-label>Log out</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet main id="m1"></ion-router-outlet>
 </ion-app>
