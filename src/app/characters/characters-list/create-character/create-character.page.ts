@@ -106,7 +106,6 @@ export class CreateCharacterPage implements OnInit {
           )
           .pipe(take(1))
           .subscribe(() => {
-            console.log("que pasa?");
             loadingEl.dismiss();
             this.form.reset();
             this.router.navigate(["tabs/characters"]);

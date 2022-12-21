@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, delay, map, switchMap, take, tap } from "rxjs";
+import { BehaviorSubject, delay, map, of, switchMap, take, tap } from "rxjs";
 import { Character } from "./character.model";
 
 interface CharacterData {
@@ -125,5 +125,58 @@ export class CharactersService {
           this._characters.next(characters.concat(newCharacter));
         })
       );
+  }
+
+  updateCharacter(
+    characterId: string,
+    name: string,
+    films: string[],
+    shortFilms: string[],
+    tvShows: string[],
+    videoGames: string[],
+    parkAttractions: string[],
+    allies: string[],
+    enemies: string[],
+    imageUrl: string
+  ) {
+    console.log(name);
+    let updatedCharacters: Character[];
+    return this.characters.pipe(
+      take(1),
+      switchMap((characters) => {
+        if (!characters || characters.length <= 0) {
+          return this.fetchCharacters();
+        } else {
+          return of(characters);
+        }
+      }),
+      switchMap((characters) => {
+        const updatedCharacterIndex = characters.findIndex(
+          (ch) => ch.id === characterId
+        );
+        const updatedCharacters = [...characters];
+        const oldCharacter = updatedCharacters[updatedCharacterIndex];
+        updatedCharacters[updatedCharacterIndex] = new Character(
+          oldCharacter.id,
+          name,
+          films,
+          shortFilms,
+          tvShows,
+          videoGames,
+          parkAttractions,
+          allies,
+          enemies,
+          imageUrl
+        );
+        console.log({ ...updatedCharacters[updatedCharacterIndex], id: null });
+        return this.http.put(
+          `https://disneyland-33519-default-rtdb.europe-west1.firebasedatabase.app/characters/${characterId}.json`,
+          { ...updatedCharacters[updatedCharacterIndex], id: null }
+        );
+      }),
+      tap(() => {
+        this._characters.next(updatedCharacters);
+      })
+    );
   }
 }

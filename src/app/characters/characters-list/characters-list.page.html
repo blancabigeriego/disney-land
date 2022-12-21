@@ -46,18 +46,29 @@
     <ion-row>
       <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
         <ion-list>
-          <ion-item
+          <ion-item-sliding
             *ngFor="let char of loadedCharacters.slice(1)"
-            [routerLink]="['/', 'tabs', 'characters', char.id ]"
             detail
+            #slidingItem
           >
-            <ion-thumbnail slot="start">
-              <ion-img [src]="char.imageUrl"></ion-img>
-            </ion-thumbnail>
-            <ion-label>
-              <h2>{{ char.name}}</h2>
-            </ion-label>
-          </ion-item>
+            <ion-item [routerLink]="['/', 'tabs', 'characters', char.id ]">
+              <ion-thumbnail slot="start">
+                <ion-img [src]="char.imageUrl"></ion-img>
+              </ion-thumbnail>
+              <ion-label>
+                <h2>{{ char.name}}</h2>
+              </ion-label>
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option
+                color="secondary"
+                [routerLink]="[ 'edit', char.id]"
+                (click)="onEdit(char.id, slidingItem)"
+              >
+                <ion-icon name="create" slot="top"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
         </ion-list>
       </ion-col>
     </ion-row>
