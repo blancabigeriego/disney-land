@@ -1,11 +1,17 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
     <ion-buttons>
-      <ion-back-button defaultHref="/tabs/characters"></ion-back-button>
+      <ion-back-button
+        color="primary"
+        defaultHref="/tabs/characters"
+      ></ion-back-button>
+      <ion-title
+        color="primary"
+        *ngIf="!isLoading"
+        class="ion-text-center ion-padding"
+        >Meet {{character.name}}</ion-title
+      >
     </ion-buttons>
-    <ion-title *ngIf="!isLoading" class="ion-text-center ion-margin"
-      >Get to know {{character.name}}</ion-title
-    >
   </ion-toolbar>
 </ion-header>
 
@@ -61,29 +67,42 @@
         <p>And my enemies are: {{character.enemies}}</p>
       </ion-col>
     </ion-row>
+    <ion-row *ngIf="!isLoading" class="ion-padding">
+      <ion-col size-sm="6" offset-sm="3" class="ion-padding">
+        <ion-buttons>
+          <ion-button
+            fill="solid"
+            shape="round"
+            color="secondary"
+            class="ion-text-center"
+            expand="block"
+            [routerLink]="['/', 'tabs', 'characters', 'edit', character.id]"
+            ><ion-icon
+              name="pencil-outline"
+              class="ion-padding ion-text-center"
+            ></ion-icon
+            >Update {{character.name}}</ion-button
+          >
+        </ion-buttons>
+      </ion-col>
+      <ion-col size-sm="6" offset-sm="3" class="ion-padding">
+        <ion-buttons>
+          <ion-button
+            expand="block"
+            class="ion-text-center"
+            fill="solid"
+            color="danger"
+            shape="round"
+            (click)="onDeleteCharacter(character.id)"
+            ><ion-icon
+              slot="start"
+              name="trash"
+              class="ion-padding ion-text-center"
+            ></ion-icon
+            >Delete {{character.name}}</ion-button
+          >
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
   </ion-grid>
-  <ion-row *ngIf="!isLoading" class="ion-padding">
-    <ion-col size-sm="8" offset-sm="1" class="ion-padding">
-      <ion-buttons>
-        <ion-button
-          color="primary"
-          [routerLink]="['/', 'tabs', 'characters', 'edit', character.id]"
-          ><ion-icon
-            name="pencil-outline"
-            color="primary"
-            class="ion-padding"
-          ></ion-icon
-          >Update {{character.name}}</ion-button
-        >
-      </ion-buttons>
-    </ion-col>
-    <ion-col size-sm="8" offset-sm="1" class="ion-padding">
-      <ion-buttons>
-        <ion-button color="danger" (click)="onDeleteCharacter(character.id)"
-          ><ion-icon slot="start" name="trash" class="ion-padding"></ion-icon
-          >Delete {{character.name}}</ion-button
-        >
-      </ion-buttons>
-    </ion-col>
-  </ion-row>
 </ion-content>
