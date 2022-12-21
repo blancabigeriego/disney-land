@@ -62,4 +62,28 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-row *ngIf="!isLoading" class="ion-padding">
+    <ion-col size-sm="8" offset-sm="1" class="ion-padding">
+      <ion-buttons>
+        <ion-button
+          color="primary"
+          [routerLink]="['/', 'tabs', 'characters', 'edit', character.id]"
+          ><ion-icon
+            name="pencil-outline"
+            color="primary"
+            class="ion-padding"
+          ></ion-icon
+          >Update {{character.name}}</ion-button
+        >
+      </ion-buttons>
+    </ion-col>
+    <ion-col size-sm="8" offset-sm="1" class="ion-padding">
+      <ion-buttons>
+        <ion-button color="danger" (click)="onDeleteCharacter(character.id)"
+          ><ion-icon slot="start" name="trash" class="ion-padding"></ion-icon
+          >Delete {{character.name}}</ion-button
+        >
+      </ion-buttons>
+    </ion-col>
+  </ion-row>
 </ion-content>
