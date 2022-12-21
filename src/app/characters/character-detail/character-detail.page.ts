@@ -46,9 +46,18 @@ export class CharacterDetailPage implements OnInit {
         });
     });
   }
-
-  onUpdateCharacter() {
-    this.navCtrl.navigateForward("tabs/characters");
+  onDeleteCharacter(charId: string) {
+    this.loadingCtrl
+      .create({
+        message: "Deleting...",
+      })
+      .then((loadingEl) => {
+        loadingEl.present();
+        this.charactersService.deleteCharacter(charId).subscribe(() => {
+          loadingEl.dismiss();
+          this.router.navigateByUrl("tabs/characters");
+        });
+      });
   }
 
   ngOnDestroy() {}
