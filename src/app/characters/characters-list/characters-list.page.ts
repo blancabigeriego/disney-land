@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { IonItemSliding } from "@ionic/angular";
 import { Subscription } from "rxjs";
 import { Character } from "../character.model";
 import { CharactersService } from "../characters.service";
@@ -31,5 +32,8 @@ export class CharactersListPage implements OnInit {
     this.charactersService.fetchCharacters().subscribe(() => {
       this.isLoading = false;
     });
+  }
+  onEdit(charId: string, slidingItem: IonItemSliding) {
+    slidingItem.close();
   }
 }
