@@ -4,7 +4,7 @@ import { BehaviorSubject, delay, map, switchMap, take, tap } from "rxjs";
 import { Character } from "./character.model";
 
 interface CharacterData {
-  id: number;
+  id: string;
   name: string;
   films: string[];
   shortFilms: string[];
@@ -29,7 +29,7 @@ export class CharactersService {
   fetchCharacters() {
     return this.http
       .get<{ [key: string]: CharacterData }>(
-        "https://disneyland-33519-default-rtdb.europe-west1.firebasedatabase.app/profile/films.json"
+        "https://disneyland-33519-default-rtdb.europe-west1.firebasedatabase.app/characters.json"
       )
       .pipe(
         map((resData) => {
@@ -38,7 +38,7 @@ export class CharactersService {
             if (resData.hasOwnProperty(key)) {
               characters.push(
                 new Character(
-                  resData[key].id,
+                  key,
                   resData[key].name,
                   resData[key].films,
                   resData[key].shortFilms,
@@ -61,6 +61,29 @@ export class CharactersService {
       );
   }
 
+  getCharacter(id: string) {
+    return this.http
+      .get<CharacterData>(
+        `https://disneyland-33519-default-rtdb.europe-west1.firebasedatabase.app/characters/${id}.json`
+      )
+      .pipe(
+        map((characterData: any) => {
+          return new Character(
+            id,
+            characterData.name,
+            characterData.films,
+            characterData.shortFilms,
+            characterData.tvShows,
+            characterData.videoGames,
+            characterData.parkAttractions,
+            characterData.allies,
+            characterData.enemies,
+            characterData.imageUrl
+          );
+        })
+      );
+  }
+
   addCharacter(
     name: string,
     films: string[],
@@ -75,7 +98,7 @@ export class CharactersService {
     let generatedId: string;
     let newCharacter: Character;
     newCharacter = new Character(
-      Math.random(),
+      Math.random().toString(),
       name,
       films,
       shortFilms,
@@ -89,7 +112,7 @@ export class CharactersService {
 
     return this.http
       .post<{ name: string }>(
-        "https://disneyland-33519-default-rtdb.europe-west1.firebasedatabase.app/profile/films.json",
+        "https://disneyland-33519-default-rtdb.europe-west1.firebasedatabase.app/characters.json",
         { ...newCharacter, id: null }
       )
       .pipe(

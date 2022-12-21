@@ -1,4 +1,16 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Router } from "@angular/router";
+import {
+  ActionSheetController,
+  AlertController,
+  LoadingController,
+  NavController,
+} from "@ionic/angular";
+import { ActivatedRoute } from "@angular/router";
+import { switchMap, take } from "rxjs/operators";
+import { Character } from "../character.model";
+import { CharactersService } from "../characters.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-character-detail",
@@ -6,9 +18,38 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./character-detail.page.scss"],
 })
 export class CharacterDetailPage implements OnInit {
-  constructor() {}
+  character: Character;
+  isLoading = false;
+  private characterSub: Subscription;
+  constructor(
+    private route: ActivatedRoute,
+    private navCtrl: NavController,
+    private charactersService: CharactersService,
+    private actionSheetCtrl: ActionSheetController,
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    console.log("I am here!");
+    this.route.paramMap.subscribe((paramMap) => {
+      if (!paramMap.has("characterId")) {
+        this.navCtrl.navigateBack("/tabs/characters");
+        return;
+      }
+      this.isLoading = true;
+      this.characterSub = this.charactersService
+        .getCharacter(paramMap.get("characterId") as string)
+        .subscribe((character) => {
+          this.character = character;
+          this.isLoading = false;
+        });
+    });
   }
+
+  onUpdateCharacter() {
+    this.navCtrl.navigateForward("tabs/characters");
+  }
+
+  ngOnDestroy() {}
 }
