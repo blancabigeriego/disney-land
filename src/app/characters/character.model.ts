@@ -9,6 +9,7 @@ export class Character {
     public parkAttractions: string[],
     public allies: string[],
     public enemies: string[],
-    public imageUrl: string
+    public imageUrl: string,
+    public userId: string
   ) {}
 }

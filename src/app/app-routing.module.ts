@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from "./auth/auth.guard";
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
     path: "landing",
     loadChildren: () =>
       import("./landing/landing.module").then((m) => m.LandingPageModule),
+    canLoad: [AuthGuard],
   },
   {
     path: "tabs",
@@ -19,6 +21,13 @@ const routes: Routes = [
       import("./characters/characters.module").then(
         (m) => m.CharactersPageModule
       ),
+    canLoad: [AuthGuard],
+  },
+
+  {
+    path: "auth",
+    loadChildren: () =>
+      import("./auth/auth.module").then((m) => m.AuthPageModule),
   },
 ];
 
