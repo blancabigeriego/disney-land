@@ -138,7 +138,7 @@ export class CharactersService {
 
         return this.http
           .post<{ name: string }>(
-            "https://disneyland-33519-default-rtdb.europe-west1.firebasedatabase.app/characters.json",
+            `https://disneyland-33519-default-rtdb.europe-west1.firebasedatabase.app/characters.json?auth=${token}`,
             { ...newCharacter, id: null }
           )
           .pipe(
