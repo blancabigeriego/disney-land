@@ -32,6 +32,17 @@ export class AuthService {
       })
     );
   }
+  get token() {
+    return this._user.asObservable().pipe(
+      map((user) => {
+        if (user) {
+          return user.token;
+        } else {
+          return null;
+        }
+      })
+    );
+  }
 
   get userId() {
     return this._user.asObservable().pipe(
