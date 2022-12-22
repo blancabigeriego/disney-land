@@ -1,12 +1,22 @@
-<ion-content>
-  <div>
+<ion-content class="landing">
+  <div class="welcome">
     <ion-img class="logo" src="assets/disney-logo.png"></ion-img>
     <h1>Welcome to Disneyland</h1>
   </div>
-  <div>
-    <ion-img class="characters-img" src="assets/characters.jpg"></ion-img>
-    <ion-button [routerLink]="['/', 'tabs', 'characters']"
-      >Get started!</ion-button
-    >
+  <div class="ion-text-center container">
+    <ion-img src="assets/characters.jpg" class="characters-img"></ion-img>
+    <div class="text-container">
+      <p class="ion-padding text">
+        Get to know the Disney characters, update them and create your own!!
+      </p>
+      <ion-button
+        class="ion-padding ion-margin button"
+        color="primary"
+        expand="block"
+        size="large"
+        [routerLink]="['/', 'tabs', 'characters']"
+        >Get started!</ion-button
+      >
+    </div>
   </div>
 </ion-content>

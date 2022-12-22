@@ -112,4 +112,8 @@ export class CreateCharacterPage implements OnInit {
           });
       });
   }
+
+  onCancel() {
+    this.router.navigateByUrl("tabs/characters");
+  }
 }

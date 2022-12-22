@@ -144,6 +144,10 @@ export class EditCharacterPage implements OnInit, OnDestroy {
           });
       });
   }
+
+  onCancel() {
+    this.router.navigateByUrl("tabs/characters");
+  }
   ngOnDestroy() {
     if (this.charactersSub) {
       this.charactersSub.unsubscribe();
