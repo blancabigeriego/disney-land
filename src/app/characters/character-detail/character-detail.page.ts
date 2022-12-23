@@ -20,6 +20,7 @@ import { Subscription } from "rxjs";
 export class CharacterDetailPage implements OnInit {
   character: Character;
   isLoading = false;
+  isYourCharacters = false;
   private characterSub: Subscription;
   constructor(
     private route: ActivatedRoute,
@@ -32,6 +33,9 @@ export class CharacterDetailPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (this.router.url.includes("/your-characters")) {
+      this.isYourCharacters = true;
+    }
     this.route.paramMap.subscribe((paramMap) => {
       if (!paramMap.has("characterId")) {
         this.navCtrl.navigateBack("/tabs/characters");
@@ -55,7 +59,11 @@ export class CharacterDetailPage implements OnInit {
         loadingEl.present();
         this.charactersService.deleteCharacter(charId).subscribe(() => {
           loadingEl.dismiss();
-          this.router.navigateByUrl("tabs/characters");
+          if (this.isYourCharacters) {
+            this.router.navigateByUrl("tabs/your-characters");
+          } else {
+            this.router.navigateByUrl("tabs/characters");
+          }
         });
       });
   }

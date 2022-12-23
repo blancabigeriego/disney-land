@@ -3,7 +3,7 @@
     <ion-buttons>
       <ion-back-button
         color="primary"
-        defaultHref="/tabs/characters"
+        defaultHref="/tabs/your-characters"
       ></ion-back-button>
       <ion-title
         color="primary"
@@ -30,7 +30,7 @@
         class="ion-text-center"
         class="ion-no-padding"
       >
-        <ion-title class="ion-text-center ion-padding"
+        <ion-title class="ion-text-center ion-padding ion-margin"
           >{{character.name}}</ion-title
         >
       </ion-col>
@@ -142,11 +142,25 @@
       <ion-col size-sm="2" offset-sm="5" class="ion-padding">
         <ion-buttons>
           <ion-button
+            *ngIf="!isYourCharacters"
             fill="solid"
             color="secondary"
             class="ion-text-center"
             expand="block"
             [routerLink]="['/', 'tabs', 'characters', 'edit', character.id]"
+            ><ion-icon
+              name="pencil-outline"
+              class="ion-padding ion-text-center"
+            ></ion-icon
+            >Update {{character.name}}</ion-button
+          >
+          <ion-button
+            *ngIf="isYourCharacters"
+            fill="solid"
+            color="secondary"
+            class="ion-text-center"
+            expand="block"
+            [routerLink]="['/', 'tabs', 'your-characters', 'edit', character.id]"
             ><ion-icon
               name="pencil-outline"
               class="ion-padding ion-text-center"

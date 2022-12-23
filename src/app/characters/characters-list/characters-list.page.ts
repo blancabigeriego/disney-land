@@ -19,12 +19,13 @@ export class CharactersListPage implements OnInit {
   isLoading = false;
 
   ngOnInit() {
-    this.isLoading = true;
+    //this.isLoading = true;
     this.charactersSub = this.charactersService.characters.subscribe(
       (characters) => {
-        this.isLoading = false;
+        //this.isLoading = false;
 
         this.loadedCharacters = characters;
+        console.log(this.loadedCharacters);
       }
     );
     console.log(this.loadedCharacters);

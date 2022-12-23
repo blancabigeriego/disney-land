@@ -58,6 +58,13 @@ const routes: Routes = [
                 (m) => m.CharacterDetailPageModule
               ),
           },
+          {
+            path: "edit/:characterId",
+            loadChildren: () =>
+              import(
+                "./characters-list/edit-character/edit-character.module"
+              ).then((m) => m.EditCharacterPageModule),
+          },
         ],
       },
       {

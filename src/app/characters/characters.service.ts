@@ -236,6 +236,7 @@ export class CharactersService {
           )
           .pipe(
             switchMap(() => {
+              console.log(this.characters);
               return this.characters;
             }),
             take(1),

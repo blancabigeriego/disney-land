@@ -97,7 +97,11 @@ export class EditCharacterPage implements OnInit, OnDestroy {
                   {
                     text: "Okey",
                     handler: () => {
-                      this.router.navigate(["tabs/characters"]);
+                      if (this.router.url.includes("/your-characters")) {
+                        this.router.navigate(["tabs/your-characters"]);
+                      } else {
+                        this.router.navigate(["tabs/characters"]);
+                      }
                     },
                   },
                 ],
@@ -140,13 +144,21 @@ export class EditCharacterPage implements OnInit, OnDestroy {
             console.log(this.form.value);
             loadingEl.dismiss();
             this.form.reset();
-            this.router.navigate(["tabs/characters"]);
+            if (this.router.url.includes("/your-characters")) {
+              this.router.navigate(["tabs/your-characters"]);
+            } else {
+              this.router.navigate(["tabs/characters"]);
+            }
           });
       });
   }
 
   onCancel() {
-    this.router.navigateByUrl("tabs/characters");
+    if (this.router.url.includes("/your-characters")) {
+      this.router.navigate(["tabs/your-characters"]);
+    } else {
+      this.router.navigateByUrl("tabs/characters");
+    }
   }
   ngOnDestroy() {
     if (this.charactersSub) {
