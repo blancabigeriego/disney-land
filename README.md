@@ -40,8 +40,8 @@ For the functionalities of the website I have used:
 
 Singup-login:
 ![Signup page](src/assets/loginpage.png)
-Landing:
 
+Landing:
 ![Landing component](src/assets/landing.png)
 
 Characters List Page:
