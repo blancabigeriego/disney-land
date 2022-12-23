@@ -39,25 +39,25 @@ For the functionalities of the website I have used:
 ## Demo:
 
 Singup-login:
-![Signup page](assets/loginpage.png)
+![Signup page](src/assets/loginpage.png)
 Landing:
 
-![Landing component](assets/landing.png)
+![Landing component](src/assets/landing.png)
 
 Characters List Page:
-![Characters list page](assets/characters-list.png)
+![Characters list page](src/assets/characters-list.png)
 
 Character details page:
-![Character details page](assets/character-details.png)
+![Character details page](src/assets/character-details.png)
 
 Edit Character Page:
-![Edit page](assets/edit.png)
+![Edit page](src/assets/edit.png)
 
 Create new Character Page:
-![Create new character page](assets/create.png)
+![Create new character page](src/assets/create.png)
 
 Your characters Page:
-![Your characters page](assets/your-characters.png)
+![Your characters page](src/assets/your-characters.png)
 
 
 ## Future work:
