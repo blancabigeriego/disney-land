@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, map, tap } from "rxjs";
+import { BehaviorSubject, from, map, tap } from "rxjs";
 import { User } from "./user.model";
 import { Preferences } from "@capacitor/preferences";
 
@@ -99,7 +99,7 @@ export class AuthService {
       expirationTime
     );
     this._user.next(user);
-    this.autoLogOut(user.tokenDuration);
+    //this.autoLogOut(user.tokenDuration);
     this.storeAuthData(
       userData.localId,
       userData.idToken,
@@ -122,6 +122,44 @@ export class AuthService {
     });
 
     Preferences.set({ key: "authData", value: data });
+  }
+
+  autoLogin() {
+    return from(Preferences.get({ key: "authData" })).pipe(
+      map((storedData) => {
+        if (!storedData || !storedData.value) {
+          return null;
+        }
+        const parsedData = JSON.parse(storedData.value) as {
+          token: string;
+          tokenExpirationDate: string;
+          userId: string;
+          email: string;
+        };
+        const expirationTime = new Date(parsedData.tokenExpirationDate);
+        if (expirationTime <= new Date()) {
+          return null;
+        }
+        const user = new User(
+          parsedData.userId,
+          parsedData.email,
+          parsedData.token,
+          expirationTime
+        );
+        console.log(parsedData);
+        console.log(user);
+        return user;
+      }),
+      tap((user) => {
+        if (user) {
+          this._user.next(user);
+          // this.autoLogOut(user.tokenDuration);
+        }
+      }),
+      map((user) => {
+        return !!user;
+      })
+    );
   }
 }
 

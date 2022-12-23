@@ -21,58 +21,128 @@
   </div>
   <ion-grid class="ion-no-pading" *ngIf="!isLoading">
     <ion-row>
-      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding">
+      <ion-col
+        size="12"
+        size-sm="8"
+        offset-sm="2"
+        size-md="4"
+        offset-md="4"
+        class="ion-text-center"
+        class="ion-no-padding"
+      >
         <ion-title class="ion-text-center ion-padding"
           >{{character.name}}</ion-title
         >
       </ion-col>
     </ion-row>
     <ion-row class="ion-padding">
-      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding">
+      <ion-col
+        size="12"
+        size-sm="8"
+        offset-sm="2"
+        size-md="4"
+        offset-md="4"
+        class="ion-text-center"
+        class="ion-no-padding"
+      >
         <ion-img [src]="character.imageUrl"></ion-img>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="character.films ">
-      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding">
+      <ion-col
+        size="12"
+        size-sm="8"
+        offset-sm="2"
+        size-md="4"
+        offset-md="4"
+        class="ion-text-center"
+        class="ion-no-padding"
+      >
         <p>You can see me in films like: {{character.films}}</p>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="character.shortFilms">
-      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding"
+      <ion-col
+        size="12"
+        size-sm="8"
+        offset-sm="2"
+        size-md="4"
+        offset-md="4"
+        class="ion-text-center"
+        class="ion-no-padding"
         ><p>In shorter ones like: {{character.shortFilms}}</p></ion-col
       >
     </ion-row>
     <ion-row *ngIf="character.tvShows">
-      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding">
+      <ion-col
+        size="12"
+        size-sm="8"
+        offset-sm="2"
+        size-md="4"
+        offset-md="4"
+        class="ion-text-center"
+        class="ion-no-padding"
+      >
         <p>Also on Tv series such as: {{character.tvShows}}</p>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="character.videoGames">
-      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding">
+      <ion-col
+        size="12"
+        size-sm="8"
+        offset-sm="2"
+        size-md="4"
+        offset-md="4"
+        class="ion-text-center"
+        class="ion-no-padding"
+      >
         <p>Play with me in: {{character.videoGames}}</p>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="character.parkAttractions">
-      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding">
+      <ion-col
+        size="12"
+        size-sm="8"
+        offset-sm="2"
+        size-md="4"
+        offset-md="4"
+        class="ion-text-center"
+        class="ion-no-padding"
+      >
         <p>Or find me at DisneyLand in: {{character.parkAttractions}}</p>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="character.allies">
-      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding">
+      <ion-col
+        size="12"
+        size-sm="8"
+        offset-sm="2"
+        size-md="4"
+        offset-md="4"
+        class="ion-text-center"
+        class="ion-no-padding"
+      >
         <p>My best friend are: {{character.allies}}</p>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="character.enemies">
-      <ion-col size-sm="6" offset-sm="3" class="ion-no-padding">
+      <ion-col
+        size="12"
+        size-sm="8"
+        offset-sm="2"
+        size-md="4"
+        offset-md="4"
+        class="ion-text-center"
+        class="ion-no-padding"
+      >
         <p>And my enemies are: {{character.enemies}}</p>
       </ion-col>
     </ion-row>
-    <ion-row *ngIf="!isLoading" class="ion-padding">
-      <ion-col size-sm="6" offset-sm="3" class="ion-padding">
+    <ion-row *ngIf="!isLoading">
+      <ion-col size-sm="2" offset-sm="5" class="ion-padding">
         <ion-buttons>
           <ion-button
             fill="solid"
-            shape="round"
             color="secondary"
             class="ion-text-center"
             expand="block"
@@ -85,14 +155,15 @@
           >
         </ion-buttons>
       </ion-col>
-      <ion-col size-sm="6" offset-sm="3" class="ion-padding">
+    </ion-row>
+    <ion-row *ngIf="!isLoading">
+      <ion-col size-sm="2" offset-sm="5" class="ion-padding">
         <ion-buttons>
           <ion-button
             expand="block"
             class="ion-text-center"
             fill="solid"
             color="danger"
-            shape="round"
             (click)="onDeleteCharacter(character.id)"
             ><ion-icon
               slot="start"
