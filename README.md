@@ -76,7 +76,7 @@ In the future I would like to implement a camera functionality where the user ha
 [Click to go to Trello Board](https://trello.com/b/pvy1iX1h/ionic-project)
 
 ## Presentation slides:
-[Click to go to Presentation Slides]()
+[Click to go to Presentation Slides](https://www.canva.com/design/DAFVkOQyiGg/uRR46iUhQE9vHjVfrQOwQg/view?utm_content=DAFVkOQyiGg&utm_campaign=designshare&utm_medium=link&utm_source=homepage_design_menu)
 
  
 
